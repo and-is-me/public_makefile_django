@@ -44,11 +44,12 @@ c: collect
 json_dumb: 	## - make dump
 	. $(ACTIVATE); src/manage.py dumpdata > db.json --exclude admin.logentry --exclude auth.permission --exclude contenttypes
 
+tbot: 	## - runtelegram bot dump
+	@echo "start telegram bot"
+	@. $(ACTIVATE); python src/bot/main.py
+
 run:		## - run server
 	. $(ACTIVATE); src/manage.py runserver 18040
-
-
-
 copy_gitignore:	## - copy .gitignore file from public_gitignore repo
 	git fetch git@github.com:and-is-me/public_gitignore.git main:public_gitignore
 	git checkout public_gitignore -- .gitignore
