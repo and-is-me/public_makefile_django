@@ -1,4 +1,4 @@
-# Repo for copypasta .gitignore to projects
+# Repo for copypasta Makefile to projects
 
 here is a doc to Makefile doc 
 https://www.gnu.org/software/make/manual/make.html
