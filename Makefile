@@ -2,9 +2,13 @@
 # this is
 
 help:	## - show this help
+	@echo ""
+	@echo "Commands:"
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
-	@echo "* * *"
+	@echo ""
+	@echo "Commands of project:"
 	@sed -ne '/@sed/!s/## //p' project.mk
+	@echo ""
 
 push:	## - push
 	git add .

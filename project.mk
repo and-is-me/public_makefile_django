@@ -9,11 +9,14 @@ ENV_PATH_=/opt/${ENV_PATH}
 ACTIVATE=$(ENV_PATH_)/venv/bin/activate
 
 help:		## - display all commands
-	echo PROJECT_NAME=${PROJECT_NAME_}
-	echo ENV_PATH=${ENV_PATH}
-	@grep '^[^#[:space:]].*:' Makefile
-	echo "source $(ACTIVATE)"
-prepare: 	## -  prepare env and install requirements
+	@echo "PROJECT_NAME is = ${PROJECT_NAME_}"
+	@echo "ENV_PATH = ${ENV_PATH}"
+	@echo "full ENV_PATH = ${ENV_PATH_}"
+	@echo "source $(ACTIVATE)"
+	@echo ""
+	@echo "Commands:"
+	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
+prepare: 	## - prepare env and install requirements
 	mkdir -p ${ENV_PATH_}
 	python3 -m venv ${ENV_PATH_}/venv
 	make install
@@ -43,7 +46,7 @@ run:		## - run server
 
 
 
-copy_gitignore:		## - run server
+copy_gitignore:	## - copy .gitignore file from public_gitignore repo
 	git fetch git@github.com:and-is-me/public_gitignore.git main:public_gitignore
 	git checkout public_gitignore -- .gitignore
 	git commit -m "Grabbed .gitignore from public_gitignore.git"
