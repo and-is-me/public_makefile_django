@@ -36,7 +36,7 @@ migrations:	## - create migrations
 	. $(ACTIVATE); src/manage.py makemigrations;
 mig: migrations
 migrate: 	## - run migrations
-	. $(ACTIVATE); @src/manage.py migrate
+	. $(ACTIVATE); src/manage.py migrate
 m: migrate
 collect: 	## - collect static
 	. $(ACTIVATE); src/manage.py collectstatic --no-input
