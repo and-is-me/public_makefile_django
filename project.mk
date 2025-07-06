@@ -23,14 +23,17 @@ prepare: 	## - prepare env and install requirements
 install: 	## - install requirements
 	. $(ACTIVATE); pip install -r src/requirements.txt
 i: install
+uninstall: 	## - uninstall requirements
+	 pip freeze | xargs pip uninstall --yes
+ui: uninstall
 style_check:	## - check style
 	echo "run style ruff  check"
 	. $(ACTIVATE); ruff check
 style:		## - format style
 	@echo "run style ruff format"
-	. $(ACTIVATE); @ruff format
+	. $(ACTIVATE); ruff format
 migrations:	## - create migrations
-	. $(ACTIVATE); @src/manage.py makemigrations;
+	. $(ACTIVATE); src/manage.py makemigrations;
 mig: migrations
 migrate: 	## - run migrations
 	. $(ACTIVATE); @src/manage.py migrate
