@@ -8,34 +8,35 @@ PROJECT_NAME_=${PROJECT_NAME}
 ENV_PATH_=/opt/${ENV_PATH}
 ACTIVATE=$(ENV_PATH_)/venv/bin/activate
 
-help:	# показать все комманды
+help:		## - display all commands
 	echo PROJECT_NAME=${PROJECT_NAME_}
 	echo ENV_PATH=${ENV_PATH}
 	@grep '^[^#[:space:]].*:' Makefile
 	echo "source $(ACTIVATE)"
-prepare: # подготовить окружение, установить данные
+prepare: 	## -  prepare env and install requirements
 	mkdir -p ${ENV_PATH_}
 	python3 -m venv ${ENV_PATH_}/venv
 	make install
-install:
-	#$(BIN)pip install --upgrade pip;
-	#$(BIN)pip install -r requirements.txt
+install: 	## - install requirements
 	. $(ACTIVATE); pip install -r src/requirements.txt
 i: install
-style_check:
+style_check:	## - check style
 	echo "run style ruff  check"
 	. $(ACTIVATE); ruff check
-style:
+style:		## - format style
 	echo "run style ruff format"
 	. $(ACTIVATE); ruff format
-migrations:
+migrations:	## - create migrations
 	. $(ACTIVATE); src/manage.py makemigrations;
 mig: migrations
-migrate:
+migrate: 	## - run migrations
 	. $(ACTIVATE); src/manage.py migrate
 m: migrate
-collect:
+collect: 	## - collect static
 	. $(ACTIVATE); src/manage.py collectstatic --no-input
 c: collect
-json_dumb:
+json_dumb: 	## - make dump
 	. $(ACTIVATE); src/manage.py dumpdata > db.json --exclude admin.logentry --exclude auth.permission --exclude contenttypes
+
+run:		## - run server
+	. $(ACTIVATE); src/manage.py runserver 18040
