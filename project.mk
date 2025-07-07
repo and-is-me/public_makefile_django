@@ -16,9 +16,10 @@ help:		## - display all commands
 	@echo ""
 	@echo "Commands:"
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
-prepare: 	## - prepare env and install requirements
+venv: 	## - prepare env and install requirements
 	mkdir -p ${ENV_PATH_}
 	python3 -m venv ${ENV_PATH_}/venv
+	. $(ACTIVATE); pip3 install --upgrade pip
 	make install
 install: 	## - install requirements
 	. $(ACTIVATE); pip install -r src/requirements.txt
@@ -55,3 +56,5 @@ copy_gitignore:	## - copy .gitignore file from public_gitignore repo
 	git checkout public_gitignore -- .gitignore
 	git commit -m "Grabbed .gitignore from public_gitignore.git"
 	git push
+	git remote remove public_gitignore
+

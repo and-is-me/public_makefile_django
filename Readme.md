@@ -27,6 +27,7 @@ mv  "project.mk" "Makefile"
 git add Makefile
 git commit -m "grabbed project.mk->Makefile from public_makefile_django repo"
 git push
+git remote remove public_makefile_django
 ```
 
 via https
@@ -37,6 +38,7 @@ mv  "project.mk" "Makefile"
 git add Makefile
 git commit -m "grabbed project.mk->Makefile from public_makefile_django repo"
 git push
+git remote remove public_makefile_django
 ```
 
 
